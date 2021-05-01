@@ -12,8 +12,13 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.red,
+    return Column(
+      children: [
+      Container(
+
+      color: Colors.black,
+    )
+      ],
     );
   }
 }
