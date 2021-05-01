@@ -13,6 +13,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return Container(
+// this is example
       color: Colors.amber,
     );
   }
