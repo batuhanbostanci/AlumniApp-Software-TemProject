@@ -1,19 +1,13 @@
 import 'package:flutter/material.dart';
+import 'login.dart';
 
 void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.teal,
-    );
-  }
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    theme: ThemeData(
+      primarySwatch: Colors.teal,
+      accentColor: Colors.cyan,
+    ),
+    home: LoginPage(),
+  ));
 }
