@@ -1,5 +1,9 @@
+import 'package:alumnisoftwareapp/mainpage.dart';
+import 'package:alumnisoftwareapp/register.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -9,6 +13,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   String email;
   String password;
+  String error = "";
   var formKey = GlobalKey<FormState>();
   bool rememberMe = false;
 
@@ -95,8 +100,9 @@ class _LoginPageState extends State<LoginPage> {
                         }),
                   ),
                   Expanded(
-                      child: TextButton(
-                          onPressed: () {}, child: Text("Forget Password?"))),
+                    child: TextButton(
+                        onPressed: () {}, child: Text("Forget Password?")),
+                  ),
                 ],
               ),
               Padding(
@@ -109,7 +115,32 @@ class _LoginPageState extends State<LoginPage> {
                           style: ElevatedButton.styleFrom(
                             primary: Colors.blueGrey,
                           ),
-                          onPressed: () {},
+                          onPressed: () async {
+                            if (formKey.currentState.validate()) {
+                              formKey.currentState.save();
+                              try {
+                                UserCredential userCredential =
+                                    await FirebaseAuth.instance
+                                        .signInWithEmailAndPassword(
+                                  email: email,
+                                  password: password,
+                                );
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => MainPage()));
+                              } on FirebaseAuthException catch (e) {
+                                if (e.code == 'user-not-found') {
+                                  error = 'No user found for that email';
+                                  print('No user found for that email.');
+                                } else if (e.code == 'wrong-password') {
+                                  error = 'No user found for that email';
+                                  print(
+                                      'Wrong password provided for that user.');
+                                }
+                              }
+                            }
+                          },
                           child: Text("Login")),
                     ),
                     SizedBox(
@@ -120,7 +151,12 @@ class _LoginPageState extends State<LoginPage> {
                           style: ElevatedButton.styleFrom(
                             primary: Colors.blueGrey,
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Register()));
+                          },
                           child: Text("Register")),
                     ),
                   ],
