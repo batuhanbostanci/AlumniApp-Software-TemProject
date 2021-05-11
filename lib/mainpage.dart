@@ -10,6 +10,7 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        //Just for the control to going to mainPage correctly
         color: Colors.red,
       ),
     );
