@@ -1,16 +1,16 @@
-# alumnisoftwareapp
+                                             ALUMNI APLLICATION
+## Softare Engineering Lesson Term Project
+#####  Bora Barış Altuntaş
+#####  Hamdi Akın
+#####  Muhammed Emre Çunkus
+##### Tacettin Batuhan Bostancı
 
-A new Flutter application.
+## Made for Ahmet Soran
 
-## Getting Started
+* Description of the Project 
+  * This is a alumni application approximately for between 3000 thousand graduated student
+  
 
-This project is a starting point for a Flutter application.
+## Apllication Pictures
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+  ![alt text](https://github.com/batuhanbostanci/AlumniApp-Software-TemProject/blob/main/ApllicationImages/First%20Page.PNG)
