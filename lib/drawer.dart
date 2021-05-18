@@ -18,8 +18,8 @@ class _MyDrawerState extends State<MyDrawer> {
           UserAccountsDrawerHeader(
               decoration: BoxDecoration(
                 color: widget.drawerColor,
-               ),
-              currentAccountPictureSize: Size.square(80),
+              ),
+              //  currentAccountPictureSize: Size.square(80),
               currentAccountPicture: CircleAvatar(
                 backgroundColor: Colors.white,
                 child: Icon(Icons.account_circle_rounded),
