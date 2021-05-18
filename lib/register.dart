@@ -4,6 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
+import 'alumni_database.dart';
+import 'package:alumnisoftwareapp/user.dart';
+import 'package:alumnisoftwareapp/alumni_database.dart';
+
 
 class Register extends StatefulWidget {
   @override
@@ -16,6 +20,7 @@ class _RegisterState extends State<Register> {
   String password;
   String name;
   String surName;
+
 
   var formKey = GlobalKey<FormState>();
 
@@ -232,6 +237,7 @@ class _RegisterState extends State<Register> {
                                     "password": password,
                                     "E-mail": mail,
                                   });
+                                  addUser();
                                   Navigator.pop(context);
                                 }
                               },
@@ -264,6 +270,20 @@ class _RegisterState extends State<Register> {
         ],
       ),
     );
+  }
+
+  Future addUser() async {
+    final user = AlumniUser(
+      firstName: name,
+      lastName: surName,
+      jobTitle: null,
+      address: null,
+      isAlumni: true,
+      registrationDate: DateTime.now(),
+      email: null,
+    );
+
+    await AlumniDatabase.instance.create(user);
   }
 
   String _emailCheck(String mail) {
