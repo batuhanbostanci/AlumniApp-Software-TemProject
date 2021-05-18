@@ -32,6 +32,9 @@ dependencies:
   firebase_core: ^1.1.1
   firebase_auth: ^1.1.4
   connectivity:
+  fluttertoast: ^8.0.6
+  shared_preferences:
+  salomon_bottom_bar: ^3.0.0
 
 dev_dependencies:
   flutter_test:
@@ -47,10 +50,15 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  fonts:
+    - family: Ubuntu
+      fonts:
+        - asset: assets/fonts/Ubuntu-Regular.ttf
 
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/universityGraduate.png
+    - assets/images/loginW.png
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
