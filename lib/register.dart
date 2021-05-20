@@ -4,10 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'alumni_database.dart';
 import 'package:alumnisoftwareapp/user.dart';
 import 'package:alumnisoftwareapp/alumni_database.dart';
-
 
 class Register extends StatefulWidget {
   @override
@@ -15,14 +15,20 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-
   String mail;
   String password;
   String name;
   String surName;
-
+  int alumniID;
+  bool isValid;
 
   var formKey = GlobalKey<FormState>();
+  @override
+  void initState() {
+    // TODO: implement initState
+    isValid = false;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +43,7 @@ class _RegisterState extends State<Register> {
             automaticallyImplyLeading: false,
             elevation: 0,
             // backgroundColor: Colors.green,
-            expandedHeight: MediaQuery.of(context).size.height* 1.8/10,
+            expandedHeight: MediaQuery.of(context).size.height * 1.8 / 10,
             primary: true,
             backgroundColor: Colors.transparent,
 
@@ -75,11 +81,11 @@ class _RegisterState extends State<Register> {
                       elevation: 8,
                       borderRadius: BorderRadius.circular(20),
                       child: Container(
-                       // height: MediaQuery.of(context).size.height * 1.5 / 20,
+                        // height: MediaQuery.of(context).size.height * 1.5 / 20,
                         //width: MediaQuery.of(context).size.width * 9 / 10,
                         padding: EdgeInsets.all(5),
                         child: TextFormField(
-                          onSaved: (value){
+                          onSaved: (value) {
                             name = value;
                           },
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -110,7 +116,7 @@ class _RegisterState extends State<Register> {
                       child: Container(
                         padding: EdgeInsets.all(5),
                         child: TextFormField(
-                          onSaved: (value){
+                          onSaved: (value) {
                             surName = value;
                           },
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -141,7 +147,7 @@ class _RegisterState extends State<Register> {
                       child: Container(
                         padding: EdgeInsets.all(5),
                         child: TextFormField(
-                          onSaved: (value){
+                          onSaved: (value) {
                             password = value;
                           },
                           obscureText: true,
@@ -149,11 +155,11 @@ class _RegisterState extends State<Register> {
                           validator: (String s) {
                             if (!s.contains(RegExp(r'[A-Z]'))) {
                               return "Use upper case character!";
-                            }else if(!s.contains(RegExp(r'[a-z]'))){
+                            } else if (!s.contains(RegExp(r'[a-z]'))) {
                               return "Use lower case character!";
-                            }else if(!s.contains(RegExp(r'[0-9]'))){
+                            } else if (!s.contains(RegExp(r'[0-9]'))) {
                               return "Use number!";
-                            }else{
+                            } else {
                               return null;
                             }
                           },
@@ -177,7 +183,7 @@ class _RegisterState extends State<Register> {
                       child: Container(
                         padding: EdgeInsets.all(5),
                         child: TextFormField(
-                          onSaved: (value){
+                          onSaved: (value) {
                             mail = value;
                           },
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -195,50 +201,93 @@ class _RegisterState extends State<Register> {
                     ),
                   ),
                   Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                    child: Material(
+                      elevation: 8,
+                      borderRadius: BorderRadius.circular(20),
+                      child: Container(
+                        padding: EdgeInsets.all(5),
+                        child: TextFormField(
+                          onSaved: (value) {
+                            alumniID = int.parse(value);
+                          },
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          //validator: _emailCheck,
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide.none,
+                            ),
+                            prefixIcon: Icon(Icons.school),
+                            labelText: "Alumni ID",
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
                     padding: EdgeInsets.only(
                         left: 20, right: 20, top: 30, bottom: 20),
                     child: Row(
                       children: [
                         Expanded(
                           child: Hero(
-                            tag : "register",
+                            tag: "register",
                             child: ElevatedButton(
                               onPressed: () async {
                                 if (formKey.currentState.validate()) {
                                   formKey.currentState.save();
-                                  print(name + " "+ surName+ " " + mail+ " "+ password);
-                                  try {
-                                    //authentication part. it directly goes into authentication part
-                                    UserCredential userCredential =
-                                        await FirebaseAuth.instance
-                                            .createUserWithEmailAndPassword(
-                                      email: mail,
-                                      password: password,
-                                    );
-                                  } on FirebaseAuthException catch (e) {
-                                    //These are showing as a warning on the page Remainder!!
-                                    //I added this part into database because we need to take these informations
-                                    //then, we are goona put into profile page
-                                    if (e.code == 'weak-password') {
-                                      print('The password provided is too weak.');
-                                    } else if (e.code == 'email-already-in-use') {
-                                      print(
-                                          'The account already exists for that email.');
+                                  var temp = await FirebaseFirestore.instance
+                                      .collection('id')
+                                      .get();
+                                  temp.docs.forEach((doc) {
+                                    if (doc["id"] == alumniID) {
+                                      setState(() {
+                                        isValid = true;
+                                      });
                                     }
-                                  } catch (e) {
-                                    print(e);
-                                  }
-                                  //These part for the adding firestore database. We can change our variables
-                                  await FirebaseFirestore.instance
-                                      .collection("users")
-                                      .add({
-                                    "name": name,
-                                    "surname": surName,
-                                    "password": password,
-                                    "E-mail": mail,
                                   });
-                                  addUser();
-                                  Navigator.pop(context);
+
+                                  if (isValid == true) {
+                                    try {
+                                      //authentication part. it directly goes into authentication part
+                                      UserCredential userCredential =
+                                          await FirebaseAuth.instance
+                                              .createUserWithEmailAndPassword(
+                                        email: mail,
+                                        password: password,
+                                      );
+                                    } on FirebaseAuthException catch (e) {
+                                      //These are showing as a warning on the page Remainder!!
+                                      //I added this part into database because we need to take these informations
+                                      //then, we are goona put into profile page
+                                      if (e.code == 'weak-password') {
+                                        print(
+                                            'The password provided is too weak.');
+                                      } else if (e.code ==
+                                          'email-already-in-use') {
+                                        print(
+                                            'The account already exists for that email.');
+                                      }
+                                    } catch (e) {
+                                      print(e);
+                                    }
+
+                                    //These part for the adding firestore database. We can change our variables
+                                    await FirebaseFirestore.instance
+                                        .collection("users")
+                                        .add({
+                                      "name": name,
+                                      "surname": surName,
+                                      "password": password,
+                                      "E-mail": mail,
+                                    });
+                                    print("added into server");
+                                    Navigator.pop(context);
+                                  } else {
+                                    showMessage(
+                                        "Your id number isn't correct!");
+                                  }
                                 }
                               },
                               child: Text("Register"),
@@ -258,9 +307,14 @@ class _RegisterState extends State<Register> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text("Already a member?"),
-                      TextButton(onPressed: () {
-                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
-                      }, child: Text("Login"))
+                      TextButton(
+                          onPressed: () {
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => LoginPage()));
+                          },
+                          child: Text("Login"))
                     ],
                   ),
                 ],
@@ -295,4 +349,15 @@ class _RegisterState extends State<Register> {
     else
       return null;
   }
+}
+
+void showMessage(String message) {
+  Fluttertoast.showToast(
+      msg: message,
+      toastLength: Toast.LENGTH_LONG,
+      gravity: ToastGravity.SNACKBAR,
+      timeInSecForIosWeb: 1,
+      backgroundColor: Colors.grey.shade300,
+      textColor: Colors.red,
+      fontSize: 16.0);
 }

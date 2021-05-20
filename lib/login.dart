@@ -21,8 +21,6 @@ class _LoginPageState extends State<LoginPage> {
   bool rememberMe = false;
   bool obscurePassword = true;
 
-
-
   @override
   void initState() {
     // TODO: implement initState
@@ -31,7 +29,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text("Login"),
@@ -170,7 +167,6 @@ class _LoginPageState extends State<LoginPage> {
                                   password: password,
                                 );
 
-
                                 Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
@@ -219,9 +215,6 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-
-
-
 
   void showMessage(String message) {
     Fluttertoast.showToast(
