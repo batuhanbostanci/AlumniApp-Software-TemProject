@@ -16,14 +16,14 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    /*  appBar:AppBar(title: Text("Search for jobs here"), actions: <Widget>[
-        IconButton(
+      appBar:AppBar(title: Text("Home Page"), actions: <Widget>[
+       /* IconButton(
             icon: Icon(Icons.search),
             onPressed: () {
-              showSearch(context: context, delegate: DataSearch());
-            })
-      ]),*/
-      drawer: Drawer(),
+             // showSearch(context: context, delegate: DataSearch());
+            })*/
+      ]),
+     // drawer: Drawer(),
       body: ChangeNotifierProvider<AppState>(
         create: (_) => AppState(),
         child: Stack(
