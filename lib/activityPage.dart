@@ -1,43 +1,26 @@
-import 'package:flutter/material.dart';
-import 'package:alumnisoftwareapp/model/category.dart';
-import 'package:alumnisoftwareapp/model/event.dart';
+
 import 'package:alumnisoftwareapp/styleguide.dart';
 import 'package:alumnisoftwareapp/ui/event_details/event_details_page.dart';
+import 'package:alumnisoftwareapp/ui/homepage/category_widget.dart';
+import 'package:alumnisoftwareapp/ui/homepage/event_widget.dart';
+import 'package:alumnisoftwareapp/ui/homepage/home_page_background.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../app_state.dart';
+import 'app_state.dart';
+import 'model/category.dart';
+import 'model/event.dart';
 
-import '../../login.dart';
-import 'category_widget.dart';
-import 'event_widget.dart';
-import 'home_page_background.dart';
+class ActivityPage extends StatefulWidget {
+  @override
+  _ActivityPageState createState() => _ActivityPageState();
+}
 
-class HomePage extends StatelessWidget {
+class _ActivityPageState extends State<ActivityPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Colors.blueGrey,
-          actions: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(right: 8.0),
-              child: TextButton.icon(
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => LoginPage()));
-                  },
-                  icon: Icon(
-                    Icons.account_circle_rounded,
-                    color: Colors.black,
-                  ),
-                  label: Text(
-                    "Log in",
-                    style: TextStyle(color: Colors.black),
-                  )),
-            )
-          ]),
-      body: ChangeNotifierProvider<AppState>(
+    return Container(
+      child: ChangeNotifierProvider<AppState>(
         create: (_) => AppState(),
         child: Stack(
           children: <Widget>[
@@ -69,14 +52,14 @@ class HomePage extends StatelessWidget {
                       child: Consumer<AppState>(
                         builder: (context, appState, _) =>
                             SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            children: <Widget>[
-                              for (final category in categories)
-                                CategoryWidget(category: category)
-                            ],
-                          ),
-                        ),
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                children: <Widget>[
+                                  for (final category in categories)
+                                    CategoryWidget(category: category)
+                                ],
+                              ),
+                            ),
                       ),
                     ),
                     Padding(

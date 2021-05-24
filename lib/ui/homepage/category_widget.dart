@@ -35,7 +35,7 @@ class CategoryWidget extends StatelessWidget {
           children: <Widget>[
             Icon(
               category.icon,
-              color: isSelected ? Theme.of(context).primaryColor : Colors.white,
+              color: isSelected ? Colors.blueGrey : Colors.white,
               size: 40,
             ),
             SizedBox(height: 10,),

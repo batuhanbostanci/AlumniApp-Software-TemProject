@@ -1,5 +1,4 @@
-import 'package:alumnisoftwareapp/mainpage.dart';
-import 'package:alumnisoftwareapp/profilePage.dart';
+import 'package:alumnisoftwareapp/mainPage.dart';
 import 'package:alumnisoftwareapp/register.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -136,7 +135,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     Expanded(
                       child: TextButton(
-                          onPressed: () {}, child: Text("Forget Password?")),
+                          onPressed: () {}, child: Text("Forget Password?",style: TextStyle(color: Colors.teal),)),
                     ),
                   ],
                 ),
@@ -170,7 +169,7 @@ class _LoginPageState extends State<LoginPage> {
                                 Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => ProfilePage()));
+                                        builder: (context) => MainPage()));
                               } on FirebaseAuthException catch (e) {
                                 if (e.code == 'user-not-found') {
                                   error = 'No user found for that email';

@@ -19,7 +19,7 @@ final TextStyle categoryTextStyle = TextStyle(
 );
 
 final TextStyle selectedCategoryTextStyle = categoryTextStyle.copyWith(
-  color: Color(0xFFFF4700),
+  color: Colors.teal
 );
 
 final TextStyle eventTitleTextStyle = TextStyle(

@@ -314,7 +314,7 @@ class _RegisterState extends State<Register> {
                                 MaterialPageRoute(
                                     builder: (context) => LoginPage()));
                           },
-                          child: Text("Login"))
+                          child: Text("Login",style: TextStyle(color: Colors.teal),))
                     ],
                   ),
                 ],

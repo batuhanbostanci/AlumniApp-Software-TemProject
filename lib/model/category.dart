@@ -10,9 +10,9 @@ class Category {
 }
 
 final allCategory = Category(
-  categoryId: 0,
+ categoryId: 0,
   name: "All",
-  icon: Icons.search,
+ icon: Icons.search,
 );
 
 final musicCategory = Category(
@@ -33,16 +33,16 @@ final golfCategory = Category(
   icon: Icons.announcement_outlined,
 );
 
-final jobCategory= Category(
-  categoryId: 4,
-  name: " Jobs",
-  icon: Icons.work
-);
+//final jobCategory= Category(
+// categoryId: 4,
+// name: " Jobs",
+// icon: Icons.work
+//);
 
 final categories = [
   allCategory,
   musicCategory,
   meetUpCategory,
   golfCategory,
-  jobCategory,
+  //jobCategory,
 ];
