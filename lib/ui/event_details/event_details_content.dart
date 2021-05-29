@@ -13,132 +13,115 @@ class EventDetailsContent extends StatelessWidget {
 
     return
 
-       SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            SizedBox(
-              height: 200,
-            ),
-            /*   Padding(
-            padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.2),
-            child: Text(
-              event.title,
-              style: eventWhiteTitleTextStyle,
-            ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.24),
-            child: FittedBox(
-              child: Row(
-                children: <Widget>[
-                  Text(
-                    "-",
-                    style: eventLocationTextStyle.copyWith(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                  Icon(
-                    Icons.location_on,
-                    color: Colors.black,
-                    size: 15,
-                  ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  Text(
-                    event.location,
-                    style: eventLocationTextStyle.copyWith(color: Colors.black, fontWeight: FontWeight.w700),
-                  ),
-                ],
-              ),
-            ),
-          ),*/
-            SizedBox(
-              height: 80,
-            ),
-            if(event.duration!="Apply now")
-              Padding(
-                padding: const EdgeInsets.only(left: 16.0),
 
-                child: Text(
-                  "Who else is coming? ",
-                  style: guestTextStyle,
-                ),
-              ),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
+            Scaffold(
+           bottomNavigationBar: GestureDetector(
+           onTap: () {
 
-              child: Row(
+    },
+    child: Container(
+    height: 48.0,
+    width: MediaQuery.of(context).size.width,
+    decoration: BoxDecoration(
+    color: Colors.white,
+    //gradient: Style.Colors.primaryGradient
+    ),
+    child: Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    crossAxisAlignment: CrossAxisAlignment.center,
+    children: <Widget>[
+    Text("Read More", style: TextStyle(
+    color: Colors.white,
+    fontFamily: "SFPro-Bold",
+    fontSize: 15.0
+    ),),
+    ],
+    ),
+    ),
+    ),
+  /*  appBar: AppBar(
+    elevation: 0.0,
+   // backgroundColor: Style.Colors.mainColor,
+    title: new Text(
+  event.title,
+    style: TextStyle(
+    fontSize: Theme.of(context).platform == TargetPlatform.android
+    ? 17.0
+        : 17.0,
+    color: Colors.white,
+    fontWeight: FontWeight.bold),
+    ),
+    ),*/
+    body: ListView(
+    children: <Widget>[
+    AspectRatio(
+    aspectRatio: 16/16,
+    child: Image.asset(
+      event.imagePath,
+      fit: BoxFit.fill,
+      width: screenWidth,
+      color: Color(0x99000000),
+      colorBlendMode: BlendMode.darken,
+      //height: screenHeight * 0.5,
+    ),
+    ),
+    Container(
+    padding: EdgeInsets.all(10.0),
+    child: Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: <Widget>[
+    SizedBox(
+    height: 10.0,
+    ),
+    Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: <Widget>[
+    Text(event.duration, style: TextStyle(
+   //color: Style.Colors.mainColor,
+    fontWeight: FontWeight.bold
+    )),
 
-                children: <Widget>[
 
-                  for (final guest in guests)
-                    if(event.duration!="Apply now")
-                      Padding(
-                        padding: const EdgeInsets.all(8),
-                        child: ClipOval(
-                          child: Image.asset(
-                            guest.imagePath,
-                            width: 90,
-                            height: 90,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                ],
-              ),
-            ),
+    ],
+    ),
+    SizedBox(
+    height: 10.0,
+    ),
+    GestureDetector(
+    onTap: () {
 
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: RichText(
-                text: TextSpan(
-                    children: [
-                      TextSpan(text: event.punchLine1, style: punchLine1TextStyle,),
-                      TextSpan(text: event.punchLine2, style: punchLine2TextStyle,),
-                    ]
-                ),
-              ),
-            ),
-            if (event.description.isNotEmpty) Padding(
-              padding: const EdgeInsets.all(16),
-              child: Text(event.description, style: eventLocationTextStyle,),
-            ),
-            if (event.galleryImages.isNotEmpty) Padding(
-              padding: const EdgeInsets.only(left: 16.0, top: 16, bottom: 16),
-              child: Text(
-                "GALLERY",
-                style: guestTextStyle,
-              ),
-            ),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: <Widget>[
-                  for (final galleryImagePath in event.galleryImages)
-                    Container(
-                      margin: const EdgeInsets.only(left: 16, right: 16, bottom: 32),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                        child: Image.asset(
-                          galleryImagePath,
-                          width: 180,
-                          height: 180,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      );
+    },
+    child: Text(
+    event.title,
+
+    style: TextStyle(
+    fontWeight: FontWeight.bold,
+    color: Colors.black,
+    fontSize: 20.0)),
+    ),
+    SizedBox(
+    height: 10.0,
+    ),
+    Text(event.description ,style: TextStyle(
+    color: Colors.grey,
+    fontSize: 12.0
+    ),),
+      Text(event.punchLine1,style: TextStyle(
+          color: Colors.grey,
+          fontSize: 12.0
+      ),),
+    SizedBox(
+    height: 5.0,
+    ),
+
+    ],
+    ),
+    )
+
+    ],
+    ),
+    );
+
 
 
 

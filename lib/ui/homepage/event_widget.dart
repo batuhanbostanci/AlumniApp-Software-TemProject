@@ -11,74 +11,93 @@ class EventWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.symmetric(vertical: 20),
-      elevation: 4,
-      color: Colors.white,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(24))),
-      child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            ClipRRect(
-              borderRadius: BorderRadius.all(
-                Radius.circular(30),
-              ),
-              child: Image.asset(
-                event.imagePath,
-                height: 150,
-                fit: BoxFit.fitWidth,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 8.0, left: 8.0),
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    flex: 3,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          event.title,
-                          style: eventTitleTextStyle,
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        FittedBox(
-                          child: Row(
+
+
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(15))),
+
+
+    child:Container(
+     /* decoration: BoxDecoration(
+
+        border: Border(
+
+          top: BorderSide(color: Colors.grey[200], width: 1.0),
+        ),
+        color: Colors.white,
+      ),*/
+      height: 100,
+      child: Row(
+        children: <Widget>[
+
+          Container(
+
+            padding: EdgeInsets.only(
+                top: 10.0, left: 10.0, bottom: 10.0, right: 10.0),
+            width: MediaQuery.of(context).size.width * 3 / 5,
+            child: Column(
+
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+
+                Text(
+                    event.title,
+                    maxLines: 3,
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        fontSize: 14.0)),
+                Expanded(
+                    child: Align(
+                      alignment: Alignment.bottomLeft,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Row(
                             children: <Widget>[
-                              Icon(Icons.location_on),
-                              SizedBox(
-                                width: 5,
-                              ),
                               Text(
-                                event.location,
-                                style: eventLocationTextStyle,
-                              ),
+
+                                      (event.duration),
+                                  style: TextStyle(
+                                      color: Colors.black26,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 10.0))
                             ],
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Text(
-                      event.duration.toUpperCase(),
-                      textAlign: TextAlign.right,
-                      style: eventLocationTextStyle.copyWith(
-                        fontWeight: FontWeight.w900,
+                        ],
                       ),
-                    ),
-                  ),
-                ],
-              ),
+                    ))
+              ],
             ),
-          ],
-        ),
+          ),
+
+          Expanded(
+            child:Container(
+
+
+               padding: EdgeInsets.all(5.0),
+                width: MediaQuery.of(context).size.width * 2 / 5,
+                height: 130,
+                child:ClipRRect(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(30),
+                    ),
+                child:FadeInImage.assetNetwork(
+
+                    alignment: Alignment.center,
+                    placeholder: event.imagePath,
+                    image:
+                    event.imagePath,
+                    fit: BoxFit.fitHeight,
+                   width: double.maxFinite,
+                    height: MediaQuery.of(context).size.height * 1 / 3))
+            ) ,
+          ),
+
+
+        ],
       ),
-    );
+    ),);
   }
+
 }

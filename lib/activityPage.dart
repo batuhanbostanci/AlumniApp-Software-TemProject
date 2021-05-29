@@ -43,7 +43,7 @@ class _ActivityPageState extends State<ActivityPage> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 32.0),
                       child: Text(
-                        "What's Up",
+                        "What's Upp",
                         style: whiteHeadingTextStyle,
                       ),
                     ),
@@ -55,7 +55,7 @@ class _ActivityPageState extends State<ActivityPage> {
                               scrollDirection: Axis.horizontal,
                               child: Row(
                                 children: <Widget>[
-                                  for (final category in categories)
+                                  for (final category in categories_logged)
                                     CategoryWidget(category: category)
                                 ],
                               ),

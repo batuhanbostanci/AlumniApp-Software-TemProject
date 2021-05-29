@@ -22,7 +22,7 @@ class CategoryWidget extends StatelessWidget {
         }
       },
       child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 8),
+       margin: const EdgeInsets.symmetric(horizontal: 8),
         width: 90,
         height: 90,
         decoration: BoxDecoration(

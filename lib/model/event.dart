@@ -15,13 +15,13 @@ class Event {
 }
 
 final erciyesEvent = Event(
-    imagePath: "assets/event_images/erciyes.jpg",
-    title: "Erciyes Mountain Climbing",
-    description: "Tickets area at erciyes.com",
+    imagePath: "assets/event_images/efe.jpg",
+    title: "BEŞİKTAŞ JK VE BESA GRUP YÖNETİM KURULU ÜYESİ MEZUNUMUZ EFE BEZCİ İLE CANLI YAYINDAYDIK !",
+    description: "Beşiktaş JK ve Besa Grup Yönetim Kurulu Üyesi,İç Mimarlık '13 Mezunumuz Efe BEZCİ ile canlı yayında bir araya geldik. Süper Lig'in unutulmaz sezonunda gelen Beşiktaş'ın çifte şampiyonluğunu,gelecek sezon hedefleri ve iş dünyası üzerinde konuştuk.Yayın sonunda yapılan çekiliş ile 6 kişiye İmzalı Beşiktaş forması hediye edildi.Katılan herkese teşekkürlerimizle..",
     location: "Erciyes Area",
-    duration: "8h",
-    punchLine1: "Climb with us!",
-    punchLine2: "You are invited to this special climbing event.",
+    duration: "21/05/2021",
+    punchLine1: "Efe Bezci ile Röportaj",
+    //punchLine2: "You are invited to this special climbing event.",
     galleryImages: [],
     categoryIds: [0, 1]);
 
