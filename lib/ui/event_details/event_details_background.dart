@@ -15,7 +15,7 @@ class EventDetailsBackground extends StatelessWidget {
         clipper: ImageClipper(),
         child: Image.asset(
           event.imagePath,
-          fit: BoxFit.cover,
+          fit: BoxFit.fill,
           width: screenWidth,
           color: Color(0x99000000),
           colorBlendMode: BlendMode.darken,

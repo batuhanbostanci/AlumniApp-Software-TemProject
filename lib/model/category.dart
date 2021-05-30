@@ -9,40 +9,35 @@ class Category {
   Category({this.categoryId, this.name, this.icon});
 }
 
-final allCategory = Category(
+final haberlerCategory = Category(
  categoryId: 0,
-  name: "All",
- icon: Icons.search,
+  name: "News",
+ icon: Icons.animation,
 );
 
 final musicCategory = Category(
   categoryId: 1,
-  name: "Events",
-  icon: Icons.event,
+  name: "Interviews",
+  icon: Icons.mic,
 );
 
-final meetUpCategory = Category(
-  categoryId: 2,
-  name: "For Alumni",
-  icon: Icons.event_available_outlined,
-);
 
-final golfCategory = Category(
-  categoryId: 3,
-  name: "Seminars",
-  icon: Icons.announcement_outlined,
-);
 
-//final jobCategory= Category(
-// categoryId: 4,
-// name: " Jobs",
-// icon: Icons.work
-//);
+final jobCategory= Category(
+ categoryId: 4,
+ name: " Jobs",
+ icon: Icons.work
+);
 
 final categories = [
-  allCategory,
+  haberlerCategory,
   musicCategory,
-  meetUpCategory,
-  golfCategory,
+
   //jobCategory,
+];
+final categories_logged = [
+  haberlerCategory,
+  musicCategory,
+  jobCategory
+
 ];
