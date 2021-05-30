@@ -1,6 +1,10 @@
+import 'package:alumnisoftwareapp/login.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatefulWidget {
+  static String fullName;
+  static bool validatedEnter;
+
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
@@ -8,6 +12,8 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
+  String location = "";
+  String job = "";
 
   @override
   void initState() {
@@ -48,7 +54,9 @@ class _ProfilePageState extends State<ProfilePage>
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
                             Text(
-                              "Bora Barış Atuntaş",
+                              //fireStore full name
+                              ProfilePage.fullName,
+                              // "fullName",
                               style: TextStyle(
                                   fontSize: 20,
                                   fontFamily: "Ubuntu",
@@ -145,19 +153,27 @@ class _ProfilePageState extends State<ProfilePage>
                               children: <Widget>[
                                 ListTile(
                                   leading: Icon(Icons.mail_outline),
-                                  title: Text("borabaris.01@gmail.com"),
+                                  title: Text(
+                                    //Firebase trans E-mail info
+                                    LoginPage.trans_Email,
+                                    //"email",
+                                  ),
                                 ),
                                 ListTile(
                                   leading: Icon(Icons.work_outline_outlined),
-                                  title: Text("Developer"),
+                                  title: Text(
+                                    "Please fill your Profile Informations!",
+                                  ),
                                 ),
                                 ListTile(
                                   leading: Icon(Icons.location_on_outlined),
-                                  title: Text("Adana"),
+                                  title: Text(
+                                      "Please fill your Profile Informations!"),
                                 ),
                                 ListTile(
                                   leading: Icon(Icons.school_outlined),
-                                  title: Text("Computer Engineering"),
+                                  title: Text(
+                                      "Please fill your Profile Informations!"),
                                 ),
                               ],
                             ),

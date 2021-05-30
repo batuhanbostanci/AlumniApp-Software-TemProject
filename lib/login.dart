@@ -1,13 +1,18 @@
+import 'package:alumnisoftwareapp/main.dart';
 import 'package:alumnisoftwareapp/mainPage.dart';
+import 'package:alumnisoftwareapp/profilePage.dart';
 import 'package:alumnisoftwareapp/register.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
+  static String trans_Email = "";
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -135,7 +140,11 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     Expanded(
                       child: TextButton(
-                          onPressed: () {}, child: Text("Forget Password?",style: TextStyle(color: Colors.teal),)),
+                          onPressed: () {},
+                          child: Text(
+                            "Forget Password?",
+                            style: TextStyle(color: Colors.teal),
+                          )),
                     ),
                   ],
                 ),
@@ -157,7 +166,6 @@ class _LoginPageState extends State<LoginPage> {
                           onPressed: () async {
                             if (formKey.currentState.validate()) {
                               formKey.currentState.save();
-
                               try {
                                 UserCredential userCredential =
                                     await FirebaseAuth.instance
@@ -165,6 +173,14 @@ class _LoginPageState extends State<LoginPage> {
                                   email: email,
                                   password: password,
                                 );
+                                //email transform for the getting information into login page
+                                LoginPage.trans_Email = email;
+                                print(LoginPage.trans_Email);
+                                //transform to the profile page
+                                await getInfo();
+                                MyApp.validated = true;
+                                //getting info for the keep user info for Future
+                                await setSharedPref();
 
                                 Navigator.pushReplacement(
                                     context,
@@ -235,4 +251,32 @@ class _LoginPageState extends State<LoginPage> {
     else
       return null;
   }
+}
+
+//set SharedPred to keep the user exit the app or not
+setSharedPref() async {
+  SharedPreferences pref = await SharedPreferences.getInstance();
+
+  await pref.setBool("values", MyApp.validated);
+}
+
+//Method for the getting information from firebase store
+Future<void> getInfo() async {
+  String name;
+  String surname;
+  var temp = await FirebaseFirestore.instance.collection('users').get();
+  temp.docs.forEach((doc) {
+    if (doc["E-mail"] == LoginPage.trans_Email) {
+      name = doc["name"];
+      surname = doc["surname"];
+    }
+  });
+  ProfilePage.fullName = name + " " + surname;
+  ProfilePage.fullName = ProfilePage.fullName.toUpperCase();
+  print(ProfilePage.fullName);
+
+  //If the user exit the app then this sharedPrefs keep the the information for the Future process
+  SharedPreferences pref = await SharedPreferences.getInstance();
+  await pref.setString("fullName", ProfilePage.fullName);
+  await pref.setString("E_mail", LoginPage.trans_Email);
 }

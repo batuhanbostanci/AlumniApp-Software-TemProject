@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:alumnisoftwareapp/login.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -240,6 +241,7 @@ class _RegisterState extends State<Register> {
                                   var temp = await FirebaseFirestore.instance
                                       .collection('id')
                                       .get();
+
                                   temp.docs.forEach((doc) {
                                     if (doc["id"] == alumniID) {
                                       setState(() {
@@ -314,7 +316,10 @@ class _RegisterState extends State<Register> {
                                 MaterialPageRoute(
                                     builder: (context) => LoginPage()));
                           },
-                          child: Text("Login",style: TextStyle(color: Colors.teal),))
+                          child: Text(
+                            "Login",
+                            style: TextStyle(color: Colors.teal),
+                          ))
                     ],
                   ),
                 ],
@@ -360,4 +365,14 @@ void showMessage(String message) {
       backgroundColor: Colors.grey.shade300,
       textColor: Colors.red,
       fontSize: 16.0);
+}
+
+//Random Generator Code for the ID's
+String randomIDGenerator() {
+  var rand = Random();
+  int length = 21;
+  const _chars =
+      'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
+  return List.generate(length, (index) => _chars[rand.nextInt(_chars.length)])
+      .join();
 }
