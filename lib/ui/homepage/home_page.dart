@@ -90,6 +90,7 @@ class HomePage extends StatelessWidget {
                               GestureDetector(
                                 onTap: () {
                                   print("printed here" + event.toString());
+                                  print("what is path:" + event.imagePath);
 
                                   Navigator.of(context).push(
                                     MaterialPageRoute(

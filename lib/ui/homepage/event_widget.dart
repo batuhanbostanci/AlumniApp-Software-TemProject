@@ -82,22 +82,25 @@ class EventWidget extends StatelessWidget {
                     borderRadius: BorderRadius.all(
                       Radius.circular(30),
                     ),
-                child:FadeInImage.assetNetwork(
+                child:Image.asset(
 
-                    alignment: Alignment.center,
-                    placeholder: event.imagePath,
-                    image:
-                    event.imagePath,
-                    fit: BoxFit.fitHeight,
-                   width: double.maxFinite,
-                    height: MediaQuery.of(context).size.height * 1 / 3))
+                  event.imagePath,
+                  fit: BoxFit.fill,
+                 // width: screenWidth,
+                  color: Color(0x99000000),
+                  colorBlendMode: BlendMode.darken,
+                  //height: screenHeight * 0.5,
+                ),)
             ) ,
           ),
 
 
         ],
       ),
-    ),);
+    ),
+
+    )
+    ;
   }
 
 }
