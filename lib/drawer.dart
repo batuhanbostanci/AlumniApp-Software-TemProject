@@ -1,6 +1,8 @@
+import 'package:alumnisoftwareapp/profilePage.dart';
 import 'package:alumnisoftwareapp/ui/homepage/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'login.dart';
 import 'main.dart';
 
 class MyDrawer extends StatefulWidget {
@@ -22,14 +24,13 @@ class _MyDrawerState extends State<MyDrawer> {
               decoration: BoxDecoration(
                 color: widget.drawerColor,
               ),
-
               // currentAccountPictureSize: Size.square(80),
               currentAccountPicture: CircleAvatar(
                 backgroundColor: Colors.white,
                 child: Icon(Icons.account_circle_rounded),
               ),
-              accountName: Text("bbaltuntas"),
-              accountEmail: Text("borabarisaltuntas@gmail.com")),
+              accountName: Text(ProfilePage.fullName),
+              accountEmail: Text(LoginPage.trans_Email)),
           Expanded(
             child: ListView(
               children: <Widget>[
