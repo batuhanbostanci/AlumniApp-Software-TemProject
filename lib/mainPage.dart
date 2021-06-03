@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:alumnisoftwareapp/Post_Event.dart';
 import 'package:alumnisoftwareapp/activityPage.dart';
 import 'package:alumnisoftwareapp/drawer.dart';
 import 'package:alumnisoftwareapp/profilePage.dart';
@@ -34,6 +35,19 @@ class _MainPageState extends State<MainPage>
       drawer: MyDrawer(appBarColor),
       body: bodyPage(),
       bottomNavigationBar: bottomNavigationBarGenerator(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) =>
+                  Post_Event()
+            ),
+          );
+
+        },
+        child: const Icon(Icons.add),
+        backgroundColor: Colors.green,
+      ),
     );
   }
 
