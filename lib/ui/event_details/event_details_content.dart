@@ -18,6 +18,7 @@ class EventDetailsContent extends StatelessWidget {
            bottomNavigationBar: GestureDetector(
            onTap: () {
 
+
     },
     child: Container(
     height: 48.0,
@@ -57,6 +58,7 @@ class EventDetailsContent extends StatelessWidget {
     AspectRatio(
     aspectRatio: 16/16,
     child: Image.asset(
+
       event.imagePath,
       fit: BoxFit.fill,
       width: screenWidth,
