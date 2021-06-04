@@ -8,6 +8,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'alumni_database.dart';
 import 'package:alumnisoftwareapp/user.dart';
 import 'package:alumnisoftwareapp/alumni_database.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class Register extends StatefulWidget {
   @override
@@ -23,11 +24,55 @@ class _RegisterState extends State<Register> {
   bool isValid;
 
   var formKey = GlobalKey<FormState>();
+
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
+
   @override
   void initState() {
     // TODO: implement initState
     isValid = false;
     super.initState();
+
+    var initializationSettingsAndroid =
+        AndroidInitializationSettings('flutter_devs');
+    var initializationSettingsIOs = IOSInitializationSettings();
+    var initSetttings = InitializationSettings(
+        android: initializationSettingsAndroid, iOS: initializationSettingsIOs);
+
+    flutterLocalNotificationsPlugin.initialize(initSetttings,
+        onSelectNotification: onSelectNotification);
+  }
+
+  Future onSelectNotification(String payload) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => LoginPage(),
+      ),
+    );
+  }
+
+  Future<void> imageContentNotifications() async {
+    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+      'media channel id 1',
+      'media channel name 1',
+      'media channel description 1',
+      color: Colors.teal,
+      enableLights: true,
+      largeIcon: DrawableResourceAndroidBitmap("etumed"),
+      styleInformation: MediaStyleInformation(),
+    );
+    var platformChannelSpecifics = NotificationDetails(
+      android: androidPlatformChannelSpecifics,
+    );
+    await flutterLocalNotificationsPlugin.show(0, 'Succesfully Registered',
+        'Now you can Login!', platformChannelSpecifics,
+        payload: "Image with Content Notifications");
+  }
+
+  Future<void> cancelNotifications() async {
+    await flutterLocalNotificationsPlugin.cancelAll();
   }
 
   @override
@@ -283,6 +328,8 @@ class _RegisterState extends State<Register> {
                                       "E-mail": mail,
                                     });
                                     print("added into server");
+                                    // Notification part
+                                    imageContentNotifications();
                                     Navigator.pop(context);
                                   } else {
                                     showMessage(
@@ -314,7 +361,10 @@ class _RegisterState extends State<Register> {
                                 MaterialPageRoute(
                                     builder: (context) => LoginPage()));
                           },
-                          child: Text("Login",style: TextStyle(color: Colors.teal),))
+                          child: Text(
+                            "Login",
+                            style: TextStyle(color: Colors.teal),
+                          ))
                     ],
                   ),
                 ],

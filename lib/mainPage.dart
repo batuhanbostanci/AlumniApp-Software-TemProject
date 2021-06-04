@@ -7,25 +7,57 @@ import 'package:alumnisoftwareapp/searchPage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 
 class MainPage extends StatefulWidget {
   @override
   _MainPageState createState() => _MainPageState();
 }
 
-class _MainPageState extends State<MainPage>
- {
+class _MainPageState extends State<MainPage> {
   int _currentIndex = 0;
   String title = "Profile";
   Color appBarColor;
+
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    var initializationSettingsAndroid =
+        AndroidInitializationSettings('flutter_devs');
+    var initializationSettingsIOs = IOSInitializationSettings();
+    var initSetttings = InitializationSettings(
+        android: initializationSettingsAndroid, iOS: initializationSettingsIOs);
+
+    flutterLocalNotificationsPlugin.initialize(initSetttings,
+        onSelectNotification: onSelectNotification);
   }
+
+  Future onSelectNotification(String payload) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ActivityPage(),
+      ),
+    );
+  }
+
+  Future<void> _configureLocalTimeZone() async {
+    tz.initializeTimeZones();
+    var turkey = tz.getLocation('Europe/Istanbul');
+    tz.setLocalLocation(turkey);
+  }
+
   @override
   Widget build(BuildContext context) {
     setPageDesign();
+    dailyNotifications();
+    weeklyNotifications();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: appBarColor,
@@ -38,12 +70,8 @@ class _MainPageState extends State<MainPage>
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) =>
-                  Post_Event()
-            ),
+            MaterialPageRoute(builder: (context) => Post_Event()),
           );
-
         },
         child: const Icon(Icons.add),
         backgroundColor: Colors.green,
@@ -52,7 +80,7 @@ class _MainPageState extends State<MainPage>
   }
 
   void setPageDesign() {
-     if (_currentIndex == 0) {
+    if (_currentIndex == 0) {
       setState(() {
         title = "Profile";
         appBarColor = Colors.teal.shade400;
@@ -78,7 +106,7 @@ class _MainPageState extends State<MainPage>
   bottomNavigationBarGenerator() {
     return SalomonBottomBar(
       currentIndex: _currentIndex,
-      onTap: (i) => setState(() =>_currentIndex = i),
+      onTap: (i) => setState(() => _currentIndex = i),
       items: [
         /// Profile
         SalomonBottomBarItem(
@@ -109,6 +137,59 @@ class _MainPageState extends State<MainPage>
         ),
       ],
     );
+  }
+
+  Future<void> dailyNotifications() async {
+    await _configureLocalTimeZone();
+
+    var time = Time(16, 0, 0);
+    var androidChannelSpecifics = AndroidNotificationDetails(
+      'media channel id 1',
+      'media channel name 1',
+      'media channel description 1',
+      importance: Importance.max,
+      priority: Priority.high,
+    );
+    var iosChannelSpecifics = IOSNotificationDetails();
+    var platformChannelSpecifics = NotificationDetails(
+        android: androidChannelSpecifics, iOS: iosChannelSpecifics);
+    await flutterLocalNotificationsPlugin.showDailyAtTime(
+      0,
+      'Take a look ${time.hour}:${time.minute}.${time.second}',
+      'ETUMED',
+      time,
+      platformChannelSpecifics,
+      payload: 'Daily Notification',
+    );
+  }
+
+  Future<void> weeklyNotifications() async {
+    await _configureLocalTimeZone();
+
+    var time = Time(21, 5, 0);
+    var androidChannelSpecifics = AndroidNotificationDetails(
+      'media channel id 2',
+      'media channel name 2',
+      'media channel description 2',
+      importance: Importance.max,
+      priority: Priority.high,
+    );
+    var iosChannelSpecifics = IOSNotificationDetails();
+    var platformChannelSpecifics = NotificationDetails(
+        android: androidChannelSpecifics, iOS: iosChannelSpecifics);
+    await flutterLocalNotificationsPlugin.showWeeklyAtDayAndTime(
+      0,
+      'What happened last week ${time.hour}:${time.minute}.${time.second}',
+      'ETUMED',
+      Day.saturday,
+      time,
+      platformChannelSpecifics,
+      payload: 'Weekly Notifications',
+    );
+  }
+
+  Future<void> cancelNotifications() async {
+    await flutterLocalNotificationsPlugin.cancelAll();
   }
 
   // ignore: missing_return
