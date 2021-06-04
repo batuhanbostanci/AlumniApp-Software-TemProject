@@ -52,6 +52,7 @@ class _LoginPageState extends State<LoginPage> {
     }
     if (_connStatus2 != "None" && count == 1) {
       showMessage("Your are online again", 2);
+      count = 0;
     }
     return Scaffold(
       appBar: AppBar(

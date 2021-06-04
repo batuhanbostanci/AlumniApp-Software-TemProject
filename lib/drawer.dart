@@ -1,6 +1,5 @@
 import 'package:alumnisoftwareapp/ui/homepage/home_page.dart';
 import 'package:flutter/material.dart';
-import 'package:alumnisoftwareapp/settings.dart';
 
 class MyDrawer extends StatefulWidget {
   Color drawerColor;
@@ -63,12 +62,6 @@ class _MyDrawerState extends State<MyDrawer> {
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Settings(),
-                      ),
-                    );
                   },
                   splashColor: widget.drawerColor,
                   child: ListTile(

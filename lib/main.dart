@@ -10,6 +10,7 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
+  static bool validated;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
