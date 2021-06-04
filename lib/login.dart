@@ -9,6 +9,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:async';
+import 'package:connectivity/connectivity.dart';
 
 class LoginPage extends StatefulWidget {
   static String trans_Email = "";
@@ -25,14 +27,33 @@ class _LoginPageState extends State<LoginPage> {
   bool rememberMe = false;
   bool obscurePassword = true;
 
+  String _connStatus1 = '';
+  String _connStatus2 = '';
+  int count;
+
+  Connectivity connectivity = Connectivity();
+  StreamSubscription<ConnectivityResult> subscription;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    connectionStatus1();
+    connectionStatus2();
   }
 
   @override
   Widget build(BuildContext context) {
+    connectionStatus2();
+    if (_connStatus2 == "None") {
+      count = 0;
+      showMessage("Connection Lost", 4);
+      count = 1;
+    }
+    if (_connStatus2 != "None" && count == 1) {
+      showMessage("Your are online again", 2);
+      count = 0;
+    }
     return Scaffold(
       appBar: AppBar(
         title: Text("Login"),
@@ -193,10 +214,12 @@ class _LoginPageState extends State<LoginPage> {
                                 if (e.code == 'user-not-found') {
                                   error = 'No user found for that email';
                                   print('No user found for that email.');
-                                  showMessage("No user found for that email.");
+                                  showMessage(
+                                      "No user found for that email.", 1);
                                 } else if (e.code == 'wrong-password') {
                                   error = 'No user found for that email';
-                                  showMessage('No user found for that email.');
+                                  showMessage(
+                                      'No user found for that email.', 1);
                                   print(
                                       'Wrong password provided for that user.');
                                 }
@@ -234,12 +257,12 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  void showMessage(String message) {
+  void showMessage(String message, int timeInSec) {
     Fluttertoast.showToast(
         msg: message,
         toastLength: Toast.LENGTH_LONG,
         gravity: ToastGravity.SNACKBAR,
-        timeInSecForIosWeb: 1,
+        timeInSecForIosWeb: timeInSec,
         backgroundColor: Colors.grey.shade300,
         textColor: Colors.black87,
         fontSize: 16.0);
@@ -253,6 +276,55 @@ class _LoginPageState extends State<LoginPage> {
       return 'Check your mail !';
     else
       return null;
+  }
+
+  String getConnectionValue(var connectivityResult) {
+    String status = '';
+    switch (connectivityResult) {
+      case ConnectivityResult.mobile:
+        status = 'Mobile';
+        break;
+      case ConnectivityResult.wifi:
+        status = 'Wi-Fi';
+        break;
+      case ConnectivityResult.none:
+        status = 'None';
+        break;
+      default:
+        status = 'None';
+        break;
+    }
+    return status;
+  }
+
+  void connectionStatus1() async {
+    var connectivityResult = await connectivity.checkConnectivity();
+    var conn = getConnectionValue(connectivityResult);
+    setState(() {
+      _connStatus1 = conn;
+    });
+  }
+
+  void connectionStatus2() async {
+    subscription =
+        connectivity.onConnectivityChanged.listen((ConnectivityResult result) {
+      var conn = getConnectionValue(result);
+      setState(() {
+        _connStatus2 = conn;
+      });
+    });
+  }
+}
+
+class ConnectivityService {
+  //
+  StreamController<ConnectivityResult> connectionStatusController =
+      StreamController<ConnectivityResult>();
+
+  ConnectivityService() {
+    Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
+      connectionStatusController.add(result);
+    });
   }
 }
 

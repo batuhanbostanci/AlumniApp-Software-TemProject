@@ -1,11 +1,5 @@
-import 'package:alumnisoftwareapp/profilePage.dart';
 import 'package:alumnisoftwareapp/ui/homepage/home_page.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'information.dart';
-import 'login.dart';
-import 'main.dart';
-import 'package:alumnisoftwareapp/settings.dart';
 
 class MyDrawer extends StatefulWidget {
   Color drawerColor;
@@ -26,13 +20,14 @@ class _MyDrawerState extends State<MyDrawer> {
               decoration: BoxDecoration(
                 color: widget.drawerColor,
               ),
+
               // currentAccountPictureSize: Size.square(80),
               currentAccountPicture: CircleAvatar(
                 backgroundColor: Colors.white,
                 child: Icon(Icons.account_circle_rounded),
               ),
-              accountName: Text(ProfilePage.fullName),
-              accountEmail: Text(LoginPage.trans_Email)),
+              accountName: Text("bbaltuntas"),
+              accountEmail: Text("borabarisaltuntas@gmail.com")),
           Expanded(
             child: ListView(
               children: <Widget>[
@@ -67,46 +62,11 @@ class _MyDrawerState extends State<MyDrawer> {
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Settings(),
-                      ),
-                    );
                   },
                   splashColor: widget.drawerColor,
                   child: ListTile(
                     leading: Icon(Icons.settings),
                     title: Text("Settings"),
-                    trailing: Icon(Icons.arrow_forward_ios_sharp),
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => PersonalInformationPage()));
-                  },
-                  splashColor: widget.drawerColor,
-                  child: ListTile(
-                    leading: Icon(Icons.work),
-                    title: Text("Information"),
-                    trailing: Icon(Icons.arrow_forward_ios_sharp),
-                  ),
-                ),
-
-                InkWell(
-                  onTap: () async {
-                    //set validated to false then the user can login in login Page
-                    setState(() {
-                      MyApp.validated = false;
-                    });
-                    await setSharedPref();
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => HomePage()));
-                  },
-                  splashColor: widget.drawerColor,
-                  child: ListTile(
-                    leading: Icon(Icons.exit_to_app),
-                    title: Text("Exit"),
                     trailing: Icon(Icons.arrow_forward_ios_sharp),
                   ),
                 ),
@@ -116,12 +76,5 @@ class _MyDrawerState extends State<MyDrawer> {
         ],
       ),
     );
-  }
-
-  //Set Pref for the automatic login to the system
-  setSharedPref() async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-
-    await pref.setBool("values", MyApp.validated);
   }
 }
