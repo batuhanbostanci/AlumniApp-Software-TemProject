@@ -150,7 +150,7 @@ class _LoginPageState extends State<LoginPage> {
                             style: TextStyle(
                                 fontSize: 13,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.teal),
+                                color: Colors.redAccent),
                           ),
                           value: rememberMe,
                           onChanged: (value) {
@@ -164,7 +164,7 @@ class _LoginPageState extends State<LoginPage> {
                           onPressed: () {},
                           child: Text(
                             "Forget Password?",
-                            style: TextStyle(color: Colors.teal),
+                            style: TextStyle(color: Colors.redAccent),
                           )),
                     ),
                   ],

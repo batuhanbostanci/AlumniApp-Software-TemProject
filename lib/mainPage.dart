@@ -67,15 +67,6 @@ class _MainPageState extends State<MainPage> {
       drawer: MyDrawer(appBarColor),
       body: bodyPage(),
       bottomNavigationBar: bottomNavigationBarGenerator(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => Post_Event()),
-          );
-        },
-        child: const Icon(Icons.add),
-        backgroundColor: Colors.green,
-      ),
     );
   }
 
@@ -83,7 +74,7 @@ class _MainPageState extends State<MainPage> {
     if (_currentIndex == 0) {
       setState(() {
         title = "Profile";
-        appBarColor = Colors.teal.shade400;
+        appBarColor = Colors.redAccent;
       });
     } else if (_currentIndex == 1) {
       setState(() {
@@ -94,7 +85,7 @@ class _MainPageState extends State<MainPage> {
       setState(() {
         title = "Activities";
         print("current index is: " + _currentIndex.toString());
-        appBarColor = Colors.blueGrey;
+        appBarColor = Colors.blue.shade900;
       });
     } else {
       setState(() {
@@ -112,7 +103,7 @@ class _MainPageState extends State<MainPage> {
         SalomonBottomBarItem(
           icon: Icon(Icons.person),
           title: Text("Profile"),
-          selectedColor: Colors.teal.shade400,
+          selectedColor: Colors.redAccent,
         ),
 
         /// Search
@@ -126,14 +117,7 @@ class _MainPageState extends State<MainPage> {
         SalomonBottomBarItem(
           icon: Icon(Icons.local_activity_outlined),
           title: Text("Activities"),
-          selectedColor: Colors.blueGrey,
-        ),
-
-        /// Home
-        SalomonBottomBarItem(
-          icon: Icon(Icons.home),
-          title: Text("Home"),
-          selectedColor: Colors.purple,
+          selectedColor: Colors.blue.shade900,
         ),
       ],
     );

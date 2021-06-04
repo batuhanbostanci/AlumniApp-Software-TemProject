@@ -46,6 +46,7 @@ class _RegisterState extends State<Register> {
   }
 
   Future onSelectNotification(String payload) {
+    print(payload);
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -97,7 +98,7 @@ class _RegisterState extends State<Register> {
                 width: MediaQuery.of(context).size.width,
                 height: 2501,
                 decoration: BoxDecoration(
-                  color: Colors.teal,
+                  color:Color.fromARGB(255,226,8,32),
                   borderRadius:
                       BorderRadius.only(bottomLeft: Radius.circular(100)),
                 ),
@@ -365,7 +366,7 @@ class _RegisterState extends State<Register> {
                           },
                           child: Text(
                             "Login",
-                            style: TextStyle(color: Colors.teal),
+                            style: TextStyle(color: Colors.redAccent),
                           ))
                     ],
                   ),

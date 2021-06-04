@@ -17,10 +17,10 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        accentColor: Colors.blueGrey,
+        accentColor: Colors.redAccent,
         //brightness: Brightness.dark,
         scaffoldBackgroundColor: Color(0xFFFFFFFF),
-        primaryColor: Colors.teal,
+        primaryColor:Color.fromARGB(255,226,8,32),
       ),
       home: HomePage(),
     );
