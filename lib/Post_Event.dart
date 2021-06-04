@@ -92,7 +92,8 @@ class _Post_EventState extends State<Post_Event> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Post an event "),
+        backgroundColor: Colors.teal,
+       // title: Text("Post an event "),
         elevation: 0,
         //  automaticallyImplyLeading: false,
       ),

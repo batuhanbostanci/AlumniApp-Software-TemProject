@@ -14,7 +14,7 @@ class EventDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.blueGrey, title: Text("Details"),),
+      appBar: AppBar(backgroundColor: Colors.blue.shade900, title: Text("Details"),),
       body: Provider<Event>.value(
         value: event,
         child: Stack(

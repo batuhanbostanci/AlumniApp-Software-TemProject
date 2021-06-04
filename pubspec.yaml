@@ -39,6 +39,10 @@ dependencies:
   intl: ^0.17.0
   provider: ^5.0.0
   image_picker: ^0.8.0
+  date_format: ^2.0.2
+  flutter_webview_plugin: ^0.4.0
+  file_picker: ^3.0.2+2
+
 
 dev_dependencies:
   flutter_test:
@@ -65,6 +69,7 @@ flutter:
     - assets/images/loginW.png
     - assets/event_images/
     - assets/guest_images/
+    - assets/images/etu_med_logo.png
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg

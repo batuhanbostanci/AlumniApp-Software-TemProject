@@ -2,6 +2,7 @@ import 'package:alumnisoftwareapp/profilePage.dart';
 import 'package:alumnisoftwareapp/ui/homepage/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'information.dart';
 import 'login.dart';
 import 'main.dart';
 import 'package:alumnisoftwareapp/settings.dart';
@@ -80,6 +81,18 @@ class _MyDrawerState extends State<MyDrawer> {
                     trailing: Icon(Icons.arrow_forward_ios_sharp),
                   ),
                 ),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => PersonalInformationPage()));
+                  },
+                  splashColor: widget.drawerColor,
+                  child: ListTile(
+                    leading: Icon(Icons.work),
+                    title: Text("Information"),
+                    trailing: Icon(Icons.arrow_forward_ios_sharp),
+                  ),
+                ),
+
                 InkWell(
                   onTap: () async {
                     //set validated to false then the user can login in login Page

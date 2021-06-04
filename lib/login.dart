@@ -53,7 +53,7 @@ class _LoginPageState extends State<LoginPage> {
                       image: DecorationImage(
                           fit: BoxFit.contain,
                           image: AssetImage(
-                              "assets/images/universityGraduate.png"))),
+                              "assets/images/etu_med_logo.png"))),
                 ),
               ),
               Padding(
@@ -178,6 +178,9 @@ class _LoginPageState extends State<LoginPage> {
                                 print(LoginPage.trans_Email);
                                 //transform to the profile page
                                 await getInfo();
+
+                                await getProfileInfo();
+
                                 MyApp.validated = true;
                                 //getting info for the keep user info for Future
                                 await setSharedPref();
@@ -259,6 +262,26 @@ setSharedPref() async {
 
   await pref.setBool("values", MyApp.validated);
 }
+
+
+
+
+//Method for the getting information from firebase store
+Future<void> getProfileInfo() async {
+
+  var temp = await FirebaseFirestore.instance.collection('profileInfo').get();
+  temp.docs.forEach((doc) {
+    if (doc["E-mail"] == LoginPage.trans_Email) {
+      ProfilePage.job = doc["job"];
+      ProfilePage.location = doc["location"];
+      ProfilePage.degree = doc["degree"];
+    }
+  });
+
+
+}
+
+
 
 //Method for the getting information from firebase store
 Future<void> getInfo() async {

@@ -12,7 +12,7 @@ class HomePageBackground extends StatelessWidget {
       clipper: BottomShapeClipper(),
       child: Container(
         height: screenHeight * 0.5,
-        color: Colors.blueGrey,
+        color: Colors.blue.shade900,
       ),
     );
   }

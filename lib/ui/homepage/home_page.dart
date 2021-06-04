@@ -18,7 +18,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
           elevation: 0,
-          backgroundColor: Colors.blueGrey,
+          backgroundColor: Colors.blue.shade900,
           actions: <Widget>[
             Padding(
               padding: const EdgeInsets.only(right: 8.0),

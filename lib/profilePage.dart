@@ -1,8 +1,20 @@
 import 'package:alumnisoftwareapp/login.dart';
+import 'package:alumnisoftwareapp/socialMedia.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
+
+import 'main.dart';
+import 'mainPage.dart';
+import 'socialMediaDetail.dart';
+
 
 class ProfilePage extends StatefulWidget {
   static String fullName;
+  static String job;
+  static String location;
+  static String degree;
+
   static bool validatedEnter;
 
   @override
@@ -19,21 +31,23 @@ class _ProfilePageState extends State<ProfilePage>
   void initState() {
     // TODO: implement initState
     super.initState();
-    _tabController = TabController(length: 2, vsync: this);
+    _tabController = TabController(length: 3, vsync: this);
   }
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
-      color: Colors.teal.shade400,
+      color: Colors.redAccent,
       child: Stack(
         children: <Widget>[
           Positioned(
             top: 0,
             child: Container(
+              // color: Colors.green,
               padding: EdgeInsets.all(25),
-              height: MediaQuery.of(context).size.height * 2 / 10,
-              width: MediaQuery.of(context).size.width,
+              // height: MediaQuery.of(context).size.height * 2 / 10,
+              //width: MediaQuery.of(context).size.width,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -42,9 +56,9 @@ class _ProfilePageState extends State<ProfilePage>
                       CircleAvatar(
                         child: Icon(
                           Icons.account_circle_rounded,
-                          color: Colors.blueGrey,
+                          color: Colors.redAccent,
                         ),
-                        backgroundColor: Colors.teal.shade200,
+                        backgroundColor: Colors.white,
                         radius: 40,
                       ),
                       Padding(
@@ -58,37 +72,10 @@ class _ProfilePageState extends State<ProfilePage>
                               ProfilePage.fullName,
                               // "fullName",
                               style: TextStyle(
+                                  color: Colors.white,
                                   fontSize: 20,
                                   fontFamily: "Ubuntu",
                                   fontWeight: FontWeight.bold),
-                            ),
-                            Row(
-                              children: [
-                                TextButton.icon(
-                                    onPressed: () {},
-                                    icon: Icon(
-                                      Icons.code,
-                                      color: Colors.black,
-                                    ),
-                                    label: Text(
-                                      "Github",
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontFamily: "Ubuntu"),
-                                    )),
-                                TextButton.icon(
-                                    onPressed: () {},
-                                    icon: Icon(
-                                      Icons.work_outline,
-                                      color: Colors.black,
-                                    ),
-                                    label: Text(
-                                      "LinkedIn",
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontFamily: "Ubuntu"),
-                                    )),
-                              ],
                             ),
                           ],
                         ),
@@ -143,11 +130,21 @@ class _ProfilePageState extends State<ProfilePage>
                                 fontFamily: "Ubuntu"),
                           ),
                         ),
+                        Tab(
+                          child: Text(
+                            "Social Media",
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                fontFamily: "Ubuntu"),
+                          ),
+                        ),
                       ]),
                       Expanded(
                         child:
-                            TabBarView(controller: _tabController, children: <
-                                Widget>[
+                        TabBarView(controller: _tabController, children: <
+                            Widget>[
                           Container(
                             child: ListView(
                               children: <Widget>[
@@ -162,18 +159,18 @@ class _ProfilePageState extends State<ProfilePage>
                                 ListTile(
                                   leading: Icon(Icons.work_outline_outlined),
                                   title: Text(
-                                    "Please fill your Profile Informations!",
+                                    ProfilePage.job
                                   ),
                                 ),
                                 ListTile(
                                   leading: Icon(Icons.location_on_outlined),
                                   title: Text(
-                                      "Please fill your Profile Informations!"),
+                                      ProfilePage.location),
                                 ),
                                 ListTile(
                                   leading: Icon(Icons.school_outlined),
                                   title: Text(
-                                      "Please fill your Profile Informations!"),
+                                      ProfilePage.degree),
                                 ),
                               ],
                             ),
@@ -187,7 +184,7 @@ class _ProfilePageState extends State<ProfilePage>
                                     margin: EdgeInsets.symmetric(vertical: 8),
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
-                                      color: Colors.teal.shade200,
+                                      color: Colors.redAccent.shade100,
                                     ),
                                     width: MediaQuery.of(context).size.width *
                                         9 /
@@ -198,10 +195,10 @@ class _ProfilePageState extends State<ProfilePage>
                                     child: ListTile(
                                       title: Text("Erciyes Mountain Climbing",
                                           style:
-                                              TextStyle(fontFamily: "Ubuntu")),
+                                          TextStyle(fontFamily: "Ubuntu")),
                                       subtitle: Text("Erciyes / Kayseri",
                                           style:
-                                              TextStyle(fontFamily: "Ubuntu")),
+                                          TextStyle(fontFamily: "Ubuntu")),
                                       trailing: Text("Joined",
                                           style: TextStyle(
                                               fontFamily: "Ubuntu",
@@ -213,7 +210,7 @@ class _ProfilePageState extends State<ProfilePage>
                                     margin: EdgeInsets.symmetric(vertical: 8),
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
-                                      color: Colors.teal.shade200,
+                                      color: Colors.redAccent.shade100,
                                     ),
                                     width: MediaQuery.of(context).size.width *
                                         9 /
@@ -224,10 +221,10 @@ class _ProfilePageState extends State<ProfilePage>
                                     child: ListTile(
                                       title: Text("Jordan Peterson Seminar",
                                           style:
-                                              TextStyle(fontFamily: "Ubuntu")),
+                                          TextStyle(fontFamily: "Ubuntu")),
                                       subtitle: Text("Kadir Has / Kayseri",
                                           style:
-                                              TextStyle(fontFamily: "Ubuntu")),
+                                          TextStyle(fontFamily: "Ubuntu")),
                                       trailing: Text("Joined",
                                           style: TextStyle(
                                               fontFamily: "Ubuntu",
@@ -237,6 +234,99 @@ class _ProfilePageState extends State<ProfilePage>
                                   ),
                                 ],
                               ),
+                            ),
+                          ),
+                          Container(
+                            child: Column(
+                              children: [
+                                ListTile(
+                                  title: Text("Facebook"),
+                                  trailing: IconButton(
+                                    icon: Icon(Icons.arrow_forward_ios_rounded),
+                                    onPressed: () {
+                                      String url;
+                                      SocialMediaPage.socialMediaAccounts
+                                          .forEach((element) {
+                                        if (element.name == "Facebook") {
+                                          url = element.url;
+
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                  new WebviewScaffold(
+                                                    url: url,
+                                                    appBar: new AppBar(
+                                                      title: Text(
+                                                          "Widget webview"),
+                                                    ),
+                                                  )));
+                                        }
+                                      });
+                                    },
+                                  ),
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                SocialMediaDetail("Facebook")));
+                                  },
+                                ),
+                                ListTile(
+                                  trailing: IconButton(
+                                    icon: Icon(Icons.arrow_forward_ios_rounded),
+                                    onPressed: () {
+                                      String url;
+                                      SocialMediaPage.socialMediaAccounts
+                                          .forEach((element) {
+                                        if (element.name == "Github") {
+                                          url = element.url;
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                  new WebviewScaffold(
+                                                    url: url,
+                                                    appBar: new AppBar(
+                                                      title: Text(
+                                                          "Widget webview"),
+                                                    ),
+                                                  )));
+                                        }
+                                      });
+                                    },
+                                  ),
+                                  title: Text("Github"),
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                SocialMediaDetail("Github")));
+                                  },
+                                ),
+                                ListTile(
+                                  title: Text("Twitter"),
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                SocialMediaDetail("Twitter")));
+                                  },
+                                ),
+                                ListTile(
+                                  title: Text("LinkedIn"),
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                SocialMediaDetail("LinkedIn")));
+                                  },
+                                ),
+                              ],
                             ),
                           ),
                         ]),

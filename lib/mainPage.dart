@@ -1,5 +1,4 @@
 import 'dart:ui';
-import 'package:alumnisoftwareapp/Post_Event.dart';
 import 'package:alumnisoftwareapp/activityPage.dart';
 import 'package:alumnisoftwareapp/drawer.dart';
 import 'package:alumnisoftwareapp/profilePage.dart';
@@ -8,12 +7,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
+import 'login.dart';
+
 class MainPage extends StatefulWidget {
   @override
   _MainPageState createState() => _MainPageState();
 }
 
 class _MainPageState extends State<MainPage>
+
  {
   int _currentIndex = 0;
   String title = "Profile";
@@ -22,6 +24,8 @@ class _MainPageState extends State<MainPage>
   void initState() {
     // TODO: implement initState
     super.initState();
+
+
   }
   @override
   Widget build(BuildContext context) {
@@ -35,27 +39,15 @@ class _MainPageState extends State<MainPage>
       drawer: MyDrawer(appBarColor),
       body: bodyPage(),
       bottomNavigationBar: bottomNavigationBarGenerator(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) =>
-                  Post_Event()
-            ),
-          );
 
-        },
-        child: const Icon(Icons.add),
-        backgroundColor: Colors.green,
-      ),
     );
   }
 
   void setPageDesign() {
-     if (_currentIndex == 0) {
+    if (_currentIndex == 0) {
       setState(() {
         title = "Profile";
-        appBarColor = Colors.teal.shade400;
+        appBarColor = Colors.redAccent;
       });
     } else if (_currentIndex == 1) {
       setState(() {
@@ -66,7 +58,7 @@ class _MainPageState extends State<MainPage>
       setState(() {
         title = "Activities";
         print("current index is: " + _currentIndex.toString());
-        appBarColor = Colors.blueGrey;
+        appBarColor = Colors.blue.shade900;
       });
     } else {
       setState(() {
@@ -74,6 +66,7 @@ class _MainPageState extends State<MainPage>
       });
     }
   }
+
 
   bottomNavigationBarGenerator() {
     return SalomonBottomBar(
@@ -84,7 +77,7 @@ class _MainPageState extends State<MainPage>
         SalomonBottomBarItem(
           icon: Icon(Icons.person),
           title: Text("Profile"),
-          selectedColor: Colors.teal.shade400,
+          selectedColor: Colors.redAccent,
         ),
 
         /// Search
@@ -98,19 +91,11 @@ class _MainPageState extends State<MainPage>
         SalomonBottomBarItem(
           icon: Icon(Icons.local_activity_outlined),
           title: Text("Activities"),
-          selectedColor: Colors.blueGrey,
-        ),
-
-        /// Home
-        SalomonBottomBarItem(
-          icon: Icon(Icons.home),
-          title: Text("Home"),
-          selectedColor: Colors.purple,
+          selectedColor: Colors.blue.shade900,
         ),
       ],
     );
   }
-
   // ignore: missing_return
   Widget bodyPage() {
     if (_currentIndex == 0) {
