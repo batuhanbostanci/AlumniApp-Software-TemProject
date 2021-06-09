@@ -1,3 +1,4 @@
+import 'package:alumnisoftwareapp/profilePage.dart';
 import 'package:alumnisoftwareapp/ui/homepage/home_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -31,8 +32,8 @@ class _MyDrawerState extends State<MyDrawer> {
                 backgroundColor: Colors.white,
                 child: Icon(Icons.account_circle_rounded),
               ),
-              accountName: Text("bbaltuntas"),
-              accountEmail: Text("borabarisaltuntas@gmail.com")),
+              accountName: Text(ProfilePage.fullName),
+              accountEmail: Text(LoginPage.trans_Email)),
           Expanded(
             child: ListView(
               children: <Widget>[
@@ -65,10 +66,12 @@ class _MyDrawerState extends State<MyDrawer> {
                     trailing: Icon(Icons.arrow_forward_ios_sharp),
                   ),
                 ),
-
                 InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => PersonalInformationPage()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PersonalInformationPage()));
                   },
                   splashColor: widget.drawerColor,
                   child: ListTile(
@@ -78,8 +81,7 @@ class _MyDrawerState extends State<MyDrawer> {
                   ),
                 ),
                 InkWell(
-                  onTap: () {
-                  },
+                  onTap: () {},
                   splashColor: widget.drawerColor,
                   child: ListTile(
                     leading: Icon(Icons.settings),
@@ -87,7 +89,6 @@ class _MyDrawerState extends State<MyDrawer> {
                     trailing: Icon(Icons.arrow_forward_ios_sharp),
                   ),
                 ),
-
                 InkWell(
                   onTap: () async {
                     //set validated to false then the user can login in login Page

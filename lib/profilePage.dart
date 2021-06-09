@@ -8,13 +8,12 @@ import 'main.dart';
 import 'mainPage.dart';
 import 'socialMediaDetail.dart';
 
-
 class ProfilePage extends StatefulWidget {
   static String fullName;
   static String job;
   static String location;
   static String degree;
-
+  static bool infoValidated = false;
   static bool validatedEnter;
 
   @override
@@ -36,7 +35,6 @@ class _ProfilePageState extends State<ProfilePage>
 
   @override
   Widget build(BuildContext context) {
-
     return Container(
       color: Colors.redAccent,
       child: Stack(
@@ -143,8 +141,8 @@ class _ProfilePageState extends State<ProfilePage>
                       ]),
                       Expanded(
                         child:
-                        TabBarView(controller: _tabController, children: <
-                            Widget>[
+                            TabBarView(controller: _tabController, children: <
+                                Widget>[
                           Container(
                             child: ListView(
                               children: <Widget>[
@@ -159,18 +157,26 @@ class _ProfilePageState extends State<ProfilePage>
                                 ListTile(
                                   leading: Icon(Icons.work_outline_outlined),
                                   title: Text(
-                                    ProfilePage.job
+                                    ProfilePage.infoValidated
+                                        ? ProfilePage.job
+                                        : "please fill",
                                   ),
                                 ),
                                 ListTile(
                                   leading: Icon(Icons.location_on_outlined),
                                   title: Text(
-                                      ProfilePage.location),
+                                    ProfilePage.infoValidated
+                                        ? ProfilePage.location
+                                        : "please fill",
+                                  ),
                                 ),
                                 ListTile(
                                   leading: Icon(Icons.school_outlined),
                                   title: Text(
-                                      ProfilePage.degree),
+                                    ProfilePage.infoValidated
+                                        ? ProfilePage.degree
+                                        : "please fill",
+                                  ),
                                 ),
                               ],
                             ),
@@ -195,10 +201,10 @@ class _ProfilePageState extends State<ProfilePage>
                                     child: ListTile(
                                       title: Text("Erciyes Mountain Climbing",
                                           style:
-                                          TextStyle(fontFamily: "Ubuntu")),
+                                              TextStyle(fontFamily: "Ubuntu")),
                                       subtitle: Text("Erciyes / Kayseri",
                                           style:
-                                          TextStyle(fontFamily: "Ubuntu")),
+                                              TextStyle(fontFamily: "Ubuntu")),
                                       trailing: Text("Joined",
                                           style: TextStyle(
                                               fontFamily: "Ubuntu",
@@ -221,10 +227,10 @@ class _ProfilePageState extends State<ProfilePage>
                                     child: ListTile(
                                       title: Text("Jordan Peterson Seminar",
                                           style:
-                                          TextStyle(fontFamily: "Ubuntu")),
+                                              TextStyle(fontFamily: "Ubuntu")),
                                       subtitle: Text("Kadir Has / Kayseri",
                                           style:
-                                          TextStyle(fontFamily: "Ubuntu")),
+                                              TextStyle(fontFamily: "Ubuntu")),
                                       trailing: Text("Joined",
                                           style: TextStyle(
                                               fontFamily: "Ubuntu",
@@ -254,13 +260,13 @@ class _ProfilePageState extends State<ProfilePage>
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                  new WebviewScaffold(
-                                                    url: url,
-                                                    appBar: new AppBar(
-                                                      title: Text(
-                                                          "Widget webview"),
-                                                    ),
-                                                  )));
+                                                      new WebviewScaffold(
+                                                        url: url,
+                                                        appBar: new AppBar(
+                                                          title: Text(
+                                                              "Widget webview"),
+                                                        ),
+                                                      )));
                                         }
                                       });
                                     },
@@ -286,13 +292,13 @@ class _ProfilePageState extends State<ProfilePage>
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                  new WebviewScaffold(
-                                                    url: url,
-                                                    appBar: new AppBar(
-                                                      title: Text(
-                                                          "Widget webview"),
-                                                    ),
-                                                  )));
+                                                      new WebviewScaffold(
+                                                        url: url,
+                                                        appBar: new AppBar(
+                                                          title: Text(
+                                                              "Widget webview"),
+                                                        ),
+                                                      )));
                                         }
                                       });
                                     },
