@@ -87,7 +87,6 @@ class _MyDrawerState extends State<MyDrawer> {
                     trailing: Icon(Icons.arrow_forward_ios_sharp),
                   ),
                 ),
-
                 InkWell(
                   onTap: () async {
                     //set validated to false then the user can login in login Page

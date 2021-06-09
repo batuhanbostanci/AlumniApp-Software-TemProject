@@ -26,12 +26,6 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
 
   @override
   Widget build(BuildContext context) {
-
-
-
-
-
-
     DateTime now = DateTime.now();
     DateTime tenYearsAgo = DateTime(now.year - 10);
     DateTime afterTime = DateTime(
@@ -46,7 +40,7 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
 
           await FirebaseFirestore.instance.collection("profileInfo").add({
             "job": job,
-            "graduationDate" : graduationDate,
+            "graduationDate": graduationDate,
             "location": location,
             "degree": degree,
             "E-mail": LoginPage.trans_Email,

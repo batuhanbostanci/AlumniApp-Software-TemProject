@@ -347,12 +347,12 @@ Future<void> getProfileInfo() async {
       ProfilePage.job = doc["job"];
       ProfilePage.location = doc["location"];
       ProfilePage.degree = doc["degree"];
+      ProfilePage.infoValidated = true;
     }
   });
 
 
 }
-
 
 
 //Method for the getting information from firebase store

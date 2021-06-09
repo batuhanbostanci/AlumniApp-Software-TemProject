@@ -14,6 +14,7 @@ class ProfilePage extends StatefulWidget {
   static String job;
   static String location;
   static String degree;
+  static bool infoValidated = false;
 
   static bool validatedEnter;
 
@@ -159,18 +160,24 @@ class _ProfilePageState extends State<ProfilePage>
                                 ListTile(
                                   leading: Icon(Icons.work_outline_outlined),
                                   title: Text(
-                                    ProfilePage.job
+                                    ProfilePage.infoValidated
+                                        ? ProfilePage.job
+                                        : "please fill",
                                   ),
                                 ),
                                 ListTile(
                                   leading: Icon(Icons.location_on_outlined),
                                   title: Text(
-                                      ProfilePage.location),
+                                    ProfilePage.infoValidated
+                                        ? ProfilePage.location
+                                        : "please fill",),
                                 ),
                                 ListTile(
                                   leading: Icon(Icons.school_outlined),
                                   title: Text(
-                                      ProfilePage.degree),
+                                    ProfilePage.infoValidated
+                                        ? ProfilePage.degree
+                                        : "please fill",),
                                 ),
                               ],
                             ),

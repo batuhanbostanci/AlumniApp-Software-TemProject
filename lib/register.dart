@@ -333,7 +333,7 @@ class _RegisterState extends State<Register> {
                                     print("added into server");
                                     // Notification part
                                     imageContentNotifications();
-                                    Navigator.pop(context);
+                                    //Navigator.pop(context);
                                   } else {
                                     showMessage(
                                         "Your id number isn't correct!");
