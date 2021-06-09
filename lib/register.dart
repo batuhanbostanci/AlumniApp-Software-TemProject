@@ -26,9 +26,6 @@ class _RegisterState extends State<Register> {
 
   var formKey = GlobalKey<FormState>();
 
-  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-      FlutterLocalNotificationsPlugin();
-
   @override
   void initState() {
     // TODO: implement initState
@@ -44,6 +41,9 @@ class _RegisterState extends State<Register> {
     flutterLocalNotificationsPlugin.initialize(initSetttings,
         onSelectNotification: onSelectNotification);
   }
+
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
 
   Future onSelectNotification(String payload) {
     print(payload);

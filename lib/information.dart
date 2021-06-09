@@ -8,6 +8,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:geolocator/geolocator.dart';
 
 class PersonalInformationPage extends StatefulWidget {
   @override
@@ -17,12 +18,22 @@ class PersonalInformationPage extends StatefulWidget {
 
 class _PersonalInformationPageState extends State<PersonalInformationPage> {
   TextEditingController dateControl = TextEditingController();
+  TextEditingController locationControl = TextEditingController();
   var formKey = GlobalKey<FormState>();
   String job;
-  String location;
   String degree;
   String graduationDate;
   String cv;
+
+  final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
+  Position cPosition;
+  String location;
+
+  @override
+  void initState() {
+    super.initState();
+    currentAddress();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +56,6 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
             "degree": degree,
             "E-mail": LoginPage.trans_Email,
           });
-
         },
         child: Icon(Icons.save),
       ),
@@ -97,15 +107,25 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                     padding: EdgeInsets.all(5),
 
                     child: TextFormField(
+                      controller: locationControl,
                       onSaved: (value) {
                         location = value;
                       },
                       keyboardType: TextInputType.text,
                       decoration: InputDecoration(
+                        suffixIcon: IconButton(
+                          icon: Icon(Icons.add),
+                          onPressed: () {
+                            {
+                              if (cPosition != null && location != null)
+                                locationControl.text = location;
+                            }
+                          },
+                        ),
                         border: OutlineInputBorder(
                           borderSide: BorderSide.none,
                         ),
-                        prefixIcon: Icon(Icons.location_on_outlined),
+                        prefixIcon: Icon(Icons.location_pin),
                         labelText: "Location",
                       ),
                     ),
@@ -225,4 +245,34 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
       ),
     );
   }
+
+    currentAddress() {
+    geolocator
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.best)
+        .then((Position position) {
+      setState(() {
+        cPosition = position;
+      });
+
+      addressFormatter();
+    }).catchError((e) {
+      print(e);
+    });
+  }
+
+  addressFormatter() async {
+    try {
+      List<Placemark> p = await geolocator.placemarkFromCoordinates(
+          cPosition.latitude, cPosition.longitude);
+
+      Placemark place = p[0];
+
+      setState(() {
+        location = "${place.locality}, ${place.postalCode}, ${place.country}";
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
 }
