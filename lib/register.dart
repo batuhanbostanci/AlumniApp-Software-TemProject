@@ -26,9 +26,6 @@ class _RegisterState extends State<Register> {
 
   var formKey = GlobalKey<FormState>();
 
-  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-      FlutterLocalNotificationsPlugin();
-
   @override
   void initState() {
     // TODO: implement initState
@@ -44,6 +41,9 @@ class _RegisterState extends State<Register> {
     flutterLocalNotificationsPlugin.initialize(initSetttings,
         onSelectNotification: onSelectNotification);
   }
+
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
 
   Future onSelectNotification(String payload) {
     print(payload);
@@ -333,7 +333,7 @@ class _RegisterState extends State<Register> {
                                     print("added into server");
                                     // Notification part
                                     imageContentNotifications();
-                                    Navigator.pop(context);
+                                    //Navigator.pop(context);
                                   } else {
                                     showMessage(
                                         "Your id number isn't correct!");

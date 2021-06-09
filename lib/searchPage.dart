@@ -1,6 +1,8 @@
 import 'package:alumnisoftwareapp/jobPosting.dart';
+import 'package:alumnisoftwareapp/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 class SearchPage extends StatefulWidget {
   @override
@@ -13,21 +15,26 @@ class _SearchPageState extends State<SearchPage> {
   String wantedPosition;
   String location;
 
+  ThemeMode themeMode = ThemeMode.system;
+  bool check = false;
+
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    check = themeProvider.isDarkMode;
     TextEditingController searchControl = TextEditingController();
     return Scaffold(
       floatingActionButton: Container(
         height: MediaQuery.of(context).size.height * 1 / 15,
         child: FloatingActionButton(
-          onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => JobPostingPage()));
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => JobPostingPage()));
           },
           child: Icon(Icons.add),
         ),
       ),
       body: Container(
-        color: Colors.white,
         child: Stack(
           children: <Widget>[
             Positioned(
@@ -73,11 +80,17 @@ class _SearchPageState extends State<SearchPage> {
                       prefixIcon: IconButton(
                         onPressed: () {},
                         icon: Icon(Icons.search),
+                        color: Colors.grey,
                       ),
-                      hintStyle: TextStyle(fontFamily: "Ubuntu", fontSize: 17),
+                      hintStyle: TextStyle(
+                        fontFamily: "Ubuntu",
+                        fontSize: 17,
+                        color: Colors.grey,
+                      ),
                       hintText: "   Search",
                       suffixIcon: IconButton(
                         icon: Icon(Icons.filter_alt_outlined),
+                        color: Colors.grey,
                         onPressed: () {
                           showDialog(
                             barrierDismissible: false,
@@ -116,9 +129,9 @@ class _SearchPageState extends State<SearchPage> {
                                                   },
                                                   decoration: InputDecoration(
                                                     labelText:
-                                                    "Wanted Position",
+                                                        "Wanted Position",
                                                     border:
-                                                    OutlineInputBorder(),
+                                                        OutlineInputBorder(),
                                                   ),
                                                 ),
                                               ),
@@ -131,7 +144,7 @@ class _SearchPageState extends State<SearchPage> {
                                                   decoration: InputDecoration(
                                                       labelText: "Location",
                                                       border:
-                                                      OutlineInputBorder()),
+                                                          OutlineInputBorder()),
                                                 ),
                                               ),
                                               Padding(
@@ -144,7 +157,7 @@ class _SearchPageState extends State<SearchPage> {
                                                       Expanded(
                                                         child: DropdownButton(
                                                             value:
-                                                            dropDownValue,
+                                                                dropDownValue,
                                                             onChanged:
                                                                 (String value) {
                                                               setState(() {
@@ -155,17 +168,17 @@ class _SearchPageState extends State<SearchPage> {
                                                             items: [
                                                               DropdownMenuItem(
                                                                   value:
-                                                                  "Internship",
+                                                                      "Internship",
                                                                   child: Text(
                                                                       "Internship")),
                                                               DropdownMenuItem(
                                                                   value:
-                                                                  "Long Term",
+                                                                      "Long Term",
                                                                   child: Text(
                                                                       "Long Term")),
                                                               DropdownMenuItem(
                                                                   value:
-                                                                  "Part Time",
+                                                                      "Part Time",
                                                                   child: Text(
                                                                       "Part Time")),
                                                             ]),
@@ -211,6 +224,7 @@ class _SearchPageState extends State<SearchPage> {
             Positioned(
               top: 150,
               child: Material(
+                color: check == true ? Colors.grey.shade900 : Colors.white,
                 child: Container(
                   height: MediaQuery.of(context).size.height * 5 / 10,
                   width: MediaQuery.of(context).size.width,
@@ -244,7 +258,6 @@ class _SearchPageState extends State<SearchPage> {
                             ),
                           ),
                         ),
-
                         Container(
                           margin: EdgeInsets.symmetric(vertical: 8),
                           decoration: BoxDecoration(
@@ -265,7 +278,6 @@ class _SearchPageState extends State<SearchPage> {
                                     fontWeight: FontWeight.bold)),
                           ),
                         ),
-
                       ],
                     ),
                   ),

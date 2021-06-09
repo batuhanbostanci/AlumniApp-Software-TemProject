@@ -1,11 +1,12 @@
 import 'package:alumnisoftwareapp/profilePage.dart';
+import 'package:alumnisoftwareapp/theme_provider.dart';
 import 'package:alumnisoftwareapp/ui/homepage/home_page.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
 import 'information.dart';
 import 'login.dart';
 import 'main.dart';
+import 'change_theme_button.dart';
 
 class MyDrawer extends StatefulWidget {
   Color drawerColor;
@@ -17,8 +18,14 @@ class MyDrawer extends StatefulWidget {
 }
 
 class _MyDrawerState extends State<MyDrawer> {
+  ThemeMode themeMode = ThemeMode.system;
+  bool check = false;
+
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    check = themeProvider.isDarkMode;
+
     return Drawer(
       child: Column(
         children: <Widget>[
@@ -108,6 +115,34 @@ class _MyDrawerState extends State<MyDrawer> {
                 ),
               ],
             ),
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text("Theme"),
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text("Light Theme"),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  ChangeThemeButton(),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Text("Dark Theme"),
+                ],
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 20,
           ),
         ],
       ),
