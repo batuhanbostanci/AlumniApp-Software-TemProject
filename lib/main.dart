@@ -4,7 +4,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'login.dart';
-import 'mainPage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'ui/homepage/home_page.dart';
 
@@ -19,7 +18,7 @@ Future<void> main() async {
   runApp(MyApp());
 }
 
-//method for the getting infos from future
+//method for the getting info's from future
 getSharedPref() async {
   SharedPreferences pref = await SharedPreferences.getInstance();
   MyApp.validated = pref.getBool("values") ?? false;

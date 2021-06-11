@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "184646747685",
-    "project_id": "alumnisoftwareapp",
-    "storage_bucket": "alumnisoftwareapp.appspot.com"
+    "project_number": "264210154242",
+    "project_id": "yeni-projemiz",
+    "storage_bucket": "yeni-projemiz.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:184646747685:android:03307d488079840d6561cc",
+        "mobilesdk_app_id": "1:264210154242:android:c23f9e67b49aa70a6ef81b",
         "android_client_info": {
           "package_name": "com.example.alumnisoftwareapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "184646747685-r86jrg7sjtd54e415vv6saok0j0q9ler.apps.googleusercontent.com",
+          "client_id": "264210154242-8rl23klkc46bql4ple4qi59l4qjrhkl7.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBqFkatVR3N9QW8_ErarpGf5AXbwx50G-c"
+          "current_key": "AIzaSyD6XmfEH1TkfoV0GasYx_JR768lqXQy3OQ"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "184646747685-r86jrg7sjtd54e415vv6saok0j0q9ler.apps.googleusercontent.com",
+              "client_id": "264210154242-8rl23klkc46bql4ple4qi59l4qjrhkl7.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
