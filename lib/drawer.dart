@@ -36,8 +36,10 @@ class _MyDrawerState extends State<MyDrawer> {
 
               // currentAccountPictureSize: Size.square(80),
               currentAccountPicture: CircleAvatar(
-                backgroundColor: Colors.white,
-                child: Icon(Icons.account_circle_rounded),
+                backgroundColor: check == true ? Colors.grey.shade900 : Colors.white,
+                child: Icon(
+                  Icons.account_circle_rounded,
+                ),
               ),
               accountName: Text(ProfilePage.fullName),
               accountEmail: Text(LoginPage.trans_Email)),

@@ -81,4 +81,27 @@ class AlumniDatabase {
 
     db.close();
   }
+
+  Future<List<AlumniUser>> readAllNotes() async {
+    final db = await instance.database;
+
+    final orderBy = '${UserFields.id} ASC';
+    // final result =
+    //     await db.rawQuery('SELECT * FROM $tableNotes ORDER BY $orderBy');
+
+    final result = await db.query(tableUsers, orderBy: orderBy);
+
+    return result.map((json) => AlumniUser.fromJson(json)).toList();
+  }
+
+  Future<int> update(AlumniUser user) async {
+    final db = await instance.database;
+
+    return db.update(
+      tableUsers,
+      user.toJson(),
+      where: '${UserFields.id} = ?',
+      whereArgs: [user.id],
+    );
+  }
 }

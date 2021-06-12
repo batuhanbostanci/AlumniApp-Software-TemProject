@@ -1,8 +1,10 @@
 import 'package:alumnisoftwareapp/login.dart';
 import 'package:alumnisoftwareapp/socialMedia.dart';
+import 'package:alumnisoftwareapp/theme_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
+import 'package:provider/provider.dart';
 
 import 'main.dart';
 import 'mainPage.dart';
@@ -26,6 +28,9 @@ class _ProfilePageState extends State<ProfilePage>
   String location = "";
   String job = "";
 
+  ThemeMode themeMode = ThemeMode.system;
+  bool check = false;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -35,6 +40,8 @@ class _ProfilePageState extends State<ProfilePage>
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    check = themeProvider.isDarkMode;
     return Container(
       color: Colors.redAccent,
       child: Stack(
@@ -56,7 +63,7 @@ class _ProfilePageState extends State<ProfilePage>
                           Icons.account_circle_rounded,
                           color: Colors.redAccent,
                         ),
-                        backgroundColor: Colors.white,
+                        backgroundColor: check == true ? Colors.grey.shade900 : Colors.white,
                         radius: 40,
                       ),
                       Padding(
@@ -100,7 +107,7 @@ class _ProfilePageState extends State<ProfilePage>
                         offset: Offset(2.0, 2.0),
                       )
                     ],
-                    color: Colors.white,
+                    color: check == true ? Colors.grey.shade900 : Colors.white,
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(25),
                         topRight: Radius.circular(15)),
@@ -112,7 +119,7 @@ class _ProfilePageState extends State<ProfilePage>
                           child: Text(
                             "About",
                             style: TextStyle(
-                                color: Colors.black,
+                                color: check == true ? Colors.white : Colors.black,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18,
                                 fontFamily: "Ubuntu"),
@@ -122,7 +129,7 @@ class _ProfilePageState extends State<ProfilePage>
                           child: Text(
                             "Activity",
                             style: TextStyle(
-                                color: Colors.black,
+                                color: check == true ? Colors.white : Colors.black,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18,
                                 fontFamily: "Ubuntu"),
@@ -132,7 +139,7 @@ class _ProfilePageState extends State<ProfilePage>
                           child: Text(
                             "Social Media",
                             style: TextStyle(
-                                color: Colors.black,
+                                color: check == true ? Colors.white : Colors.black,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18,
                                 fontFamily: "Ubuntu"),
@@ -156,26 +163,17 @@ class _ProfilePageState extends State<ProfilePage>
                                 ),
                                 ListTile(
                                   leading: Icon(Icons.work_outline_outlined),
-                                  title: Text(
-                                    ProfilePage.infoValidated
-                                        ? ProfilePage.job
-                                        : "please fill",
+                                  title: Text("please fill",
                                   ),
                                 ),
                                 ListTile(
                                   leading: Icon(Icons.location_on_outlined),
-                                  title: Text(
-                                    ProfilePage.infoValidated
-                                        ? ProfilePage.location
-                                        : "please fill",
+                                  title: Text("please fill",
                                   ),
                                 ),
                                 ListTile(
                                   leading: Icon(Icons.school_outlined),
-                                  title: Text(
-                                    ProfilePage.infoValidated
-                                        ? ProfilePage.degree
-                                        : "please fill",
+                                  title: Text( "please fill",
                                   ),
                                 ),
                               ],
